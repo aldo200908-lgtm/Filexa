@@ -69,15 +69,13 @@ export default function FeaturedApps() {
       </div>
 
       {/* Grid */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-          gap: '20px'
-        }}
-      >
-        {filteredApps.map(app => (
-          <div
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+  <img
+    src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png"
+    style={{ width: '64px', borderRadius: '14px' }}
+  />
+  <h1>{app.title}</h1>
+</div>
   key={app.id}
   onClick={() => navigate(`/app/${app.slug}`)}
   style={{
