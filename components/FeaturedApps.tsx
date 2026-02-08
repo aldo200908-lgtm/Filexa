@@ -13,31 +13,36 @@ const apps: App[] = [
     title: 'Spotify Premium',
     description: 'APK modificado sin anuncios',
     category: 'APK'
+    slug:'Spotify-Premium'
   },
   {
     id: 2,
     title: 'Minecraft',
     description: 'Juego completo con todas las funciones',
     category: 'Juegos'
+    slug: 'Minecraft'
   },
   {
     id: 3,
     title: 'Photoshop',
     description: 'Software profesional para edición',
     category: 'Programas'
+    slug: 'Photoshop'
   },
   {
     id: 4,
     title: 'Netflix Mod',
     description: 'Contenido desbloqueado',
     category: 'APK'
+    slug: 'Netflix-Mod
   }
 ]
 
 export default function FeaturedApps() {
   const [category, setCategory] = useState('Todas')
   const [search, setSearch] = useState('')
-
+  
+const navigate = useNavigate()
   const categories = ['Todas', 'APK', 'Juegos', 'Programas']
 
   const filteredApps = apps.filter(app => {
@@ -68,7 +73,7 @@ export default function FeaturedApps() {
       >
         Apps destacadas
       </h2>
-
+      
       {/* CATEGORÍAS */}
       <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
         {categories.map(cat => (
@@ -117,8 +122,11 @@ export default function FeaturedApps() {
         }}
       >
         {filteredApps.map(app => (
-          <div
-            key={app.id}
+  <div
+    key={app.id}
+    onClick={() => navigate(`/app/${app.slug}`)}
+    style={{ cursor: 'pointer' }}
+  >
             style={{
               background: '#0b1d3a',
               borderRadius: '16px',
