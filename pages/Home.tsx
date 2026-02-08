@@ -1,6 +1,7 @@
 import Header from '../components/Header'
 import Hero from '../components/Hero'
 import AppCard from '../components/AppCard'
+import Footer from '../components/Footer'
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <AppCard />
       <AppCard />
       <AppCard />
+      <Footer />
     </>
   )
 }
