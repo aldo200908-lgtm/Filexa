@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 type App = {
   id: number
   title: string
@@ -33,12 +34,16 @@ const apps: App[] = [
   }
 ]
 
-export default function FeaturedApps() {const [category, setCategory] = useState('Todas')
-                                        const categories = ['Todas', 'APK', 'Juegos', 'Programas']
-                                        const filteredApps =
-  category === 'Todas'
-    ? apps
-    : apps.filter(app => app.category === category)
+export default function FeaturedApps() {
+  const [category, setCategory] = useState('Todas')
+
+  const categories = ['Todas', 'APK', 'Juegos', 'Programas']
+
+  const filteredApps =
+    category === 'Todas'
+      ? apps
+      : apps.filter(app => app.category === category)
+
   return (
     <section
       style={{
@@ -47,16 +52,31 @@ export default function FeaturedApps() {const [category, setCategory] = useState
         color: '#ffffff'
       }}
     >
-      <h2
-        style={{
-          fontSize: '2rem',
-          marginBottom: '32px',
-          color: '#00b3ff'
-        }}
-      >
+      <h2 style={{ color: '#00b3ff', marginBottom: '20px' }}>
         Apps destacadas
       </h2>
 
+      {/* BOTONES DE CATEGORÍA */}
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '32px' }}>
+        {categories.map(cat => (
+          <button
+            key={cat}
+            onClick={() => setCategory(cat)}
+            style={{
+              background: category === cat ? '#00b3ff' : 'transparent',
+              color: category === cat ? '#000' : '#00b3ff',
+              border: '1px solid #00b3ff',
+              padding: '8px 14px',
+              borderRadius: '20px',
+              cursor: 'pointer'
+            }}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* GRID */}
       <div
         style={{
           display: 'grid',
@@ -64,25 +84,20 @@ export default function FeaturedApps() {const [category, setCategory] = useState
           gap: '24px'
         }}
       >
-        filteredApps.map(app => (
-         <div style={{ marginBottom: '24px', display: 'flex', gap: '12px' }}>
-  {categories.map(cat => (
-    <button
-      key={cat}
-      onClick={() => setCategory(cat)}
-      style={{
-        background: category === cat ? '#00b3ff' : 'transparent',
-        color: category === cat ? '#000' : '#00b3ff',
-        border: '1px solid #00b3ff',
-        padding: '8px 14px',
-        borderRadius: '20px',
-        cursor: 'pointer'
-      }}
-    >
-      {cat}
-    </button>
-  ))}
-</div>
+        {filteredApps.map(app => (
+          <div
+            key={app.id}
+            style={{
+              background: '#0b1d3a',
+              borderRadius: '16px',
+              padding: '20px',
+              border: '1px solid #102a52'
+            }}
+          >
+            <small style={{ color: '#00b3ff' }}>{app.category}</small>
+            <h3 style={{ margin: '10px 0' }}>{app.title}</h3>
+            <p style={{ color: '#bcdcff' }}>{app.description}</p>
+          </div>
         ))}
       </div>
     </section>
