@@ -1,15 +1,19 @@
-import Header from '../components/Header'
-import Hero from '../components/Hero'
 import FeaturedApps from '../components/FeaturedApps'
-import Footer from '../components/Footer'
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <Hero />
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#050b1a',
+        padding: '40px'
+      }}
+    >
+      <h1 style={{ color: '#00b3ff', marginBottom: '30px' }}>
+        Filexa
+      </h1>
+
       <FeaturedApps />
-      <Footer />
-    </>
+    </div>
   )
 }
