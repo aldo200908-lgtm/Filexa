@@ -59,44 +59,27 @@ export default function FeaturedApps() {
         }}
       >
         {apps.map(app => (
-          <div
-            key={app.id}
-            style={{
-              background: '#0b1d3a',
-              borderRadius: '16px',
-              padding: '20px',
-              border: '1px solid #102a52',
-              transition: 'transform 0.2s ease'
-            }}
-          >
-            <span
-              style={{
-                fontSize: '0.75rem',
-                color: '#00b3ff',
-                textTransform: 'uppercase'
-              }}
-            >
-              {app.category}
-            </span>
-
-            <h3 style={{ margin: '12px 0 8px' }}>{app.title}</h3>
-
-            <p style={{ color: '#bcdcff', fontSize: '0.95rem' }}>
-              {app.description}
-            </p>
-
-            <button
-              style={{
-                marginTop: '16px',
-                background: '#00b3ff',
-                color: '#000',
-                border: 'none',
-                padding: '10px 14px',
-                borderRadius: '8px',
-                fontWeight: '600',
-                cursor: 'pointer'
-              }}
-            >
+         <div
+  key={app.id}
+  style={{
+    background: '#0b1d3a',
+    borderRadius: '16px',
+    padding: '20px',
+    border: '1px solid #102a52',
+    transition: 'all 0.25s ease',
+    cursor: 'pointer',
+    boxShadow: '0 0 0 rgba(0,179,255,0)'
+  }}
+  onMouseEnter={e => {
+    e.currentTarget.style.transform = 'translateY(-6px)'
+    e.currentTarget.style.boxShadow =
+      '0 0 20px rgba(0,179,255,0.35)'
+  }}
+  onMouseLeave={e => {
+    e.currentTarget.style.transform = 'translateY(0)'
+    e.currentTarget.style.boxShadow = '0 0 0 rgba(0,179,255,0)'
+  }}
+>
               Ver detalles
             </button>
           </div>
