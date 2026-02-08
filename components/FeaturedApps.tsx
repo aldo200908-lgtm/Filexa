@@ -32,7 +32,17 @@ export default function FeaturedApps() {
     category === 'Todas'
       ? apps
       : apps.filter(app => app.category === category)
-
+<img
+  src="https://i.imgur.com/Z7AzH2c.jpg"
+  alt={app.title}
+  style={{
+    width: '100%',
+    maxHeight: '300px',
+    objectFit: 'cover',
+    borderRadius: '20px',
+    marginBottom: '30px'
+  }}
+/>
   return (
     <div>
       {/* Categorías */}
