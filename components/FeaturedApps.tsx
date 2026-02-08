@@ -1,3 +1,4 @@
+import { useState } from 'react'
 type App = {
   id: number
   title: string
@@ -32,7 +33,12 @@ const apps: App[] = [
   }
 ]
 
-export default function FeaturedApps() {
+export default function FeaturedApps() {const [category, setCategory] = useState('Todas')
+                                        const categories = ['Todas', 'APK', 'Juegos', 'Programas']
+                                        const filteredApps =
+  category === 'Todas'
+    ? apps
+    : apps.filter(app => app.category === category)
   return (
     <section
       style={{
@@ -58,31 +64,25 @@ export default function FeaturedApps() {
           gap: '24px'
         }}
       >
-        {apps.map(app => (
-         <div
-  key={app.id}
-  style={{
-    background: '#0b1d3a',
-    borderRadius: '16px',
-    padding: '20px',
-    border: '1px solid #102a52',
-    transition: 'all 0.25s ease',
-    cursor: 'pointer',
-    boxShadow: '0 0 0 rgba(0,179,255,0)'
-  }}
-  onMouseEnter={e => {
-    e.currentTarget.style.transform = 'translateY(-6px)'
-    e.currentTarget.style.boxShadow =
-      '0 0 20px rgba(0,179,255,0.35)'
-  }}
-  onMouseLeave={e => {
-    e.currentTarget.style.transform = 'translateY(0)'
-    e.currentTarget.style.boxShadow = '0 0 0 rgba(0,179,255,0)'
-  }}
->
-              Ver detalles
-            </button>
-          </div>
+        filteredApps.map(app => (
+         <div style={{ marginBottom: '24px', display: 'flex', gap: '12px' }}>
+  {categories.map(cat => (
+    <button
+      key={cat}
+      onClick={() => setCategory(cat)}
+      style={{
+        background: category === cat ? '#00b3ff' : 'transparent',
+        color: category === cat ? '#000' : '#00b3ff',
+        border: '1px solid #00b3ff',
+        padding: '8px 14px',
+        borderRadius: '20px',
+        cursor: 'pointer'
+      }}
+    >
+      {cat}
+    </button>
+  ))}
+</div>
         ))}
       </div>
     </section>
