@@ -36,13 +36,20 @@ const apps: App[] = [
 
 export default function FeaturedApps() {
   const [category, setCategory] = useState('Todas')
+  const [search, setSearch] = useState('')
 
   const categories = ['Todas', 'APK', 'Juegos', 'Programas']
 
-  const filteredApps =
-    category === 'Todas'
-      ? apps
-      : apps.filter(app => app.category === category)
+  const filteredApps = apps.filter(app => {
+    const matchesCategory =
+      category === 'Todas' || app.category === category
+
+    const matchesSearch = app.title
+      .toLowerCase()
+      .includes(search.toLowerCase())
+
+    return matchesCategory && matchesSearch
+  })
 
   return (
     <section
@@ -52,12 +59,18 @@ export default function FeaturedApps() {
         color: '#ffffff'
       }}
     >
-      <h2 style={{ color: '#00b3ff', marginBottom: '20px' }}>
+      <h2
+        style={{
+          fontSize: '2rem',
+          marginBottom: '20px',
+          color: '#00b3ff'
+        }}
+      >
         Apps destacadas
       </h2>
 
-      {/* BOTONES DE CATEGORÍA */}
-      <div style={{ display: 'flex', gap: '12px', marginBottom: '32px' }}>
+      {/* CATEGORÍAS */}
+      <div style={{ display: 'flex', gap: '12px', marginBottom: '20px' }}>
         {categories.map(cat => (
           <button
             key={cat}
@@ -68,13 +81,32 @@ export default function FeaturedApps() {
               border: '1px solid #00b3ff',
               padding: '8px 14px',
               borderRadius: '20px',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              fontSize: '0.85rem'
             }}
           >
             {cat}
           </button>
         ))}
       </div>
+
+      {/* BUSCADOR */}
+      <input
+        type="text"
+        placeholder="Buscar apps..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        style={{
+          width: '100%',
+          maxWidth: '360px',
+          marginBottom: '32px',
+          padding: '10px 14px',
+          borderRadius: '10px',
+          border: '1px solid #102a52',
+          background: '#050b1a',
+          color: '#ffffff'
+        }}
+      />
 
       {/* GRID */}
       <div
@@ -91,12 +123,37 @@ export default function FeaturedApps() {
               background: '#0b1d3a',
               borderRadius: '16px',
               padding: '20px',
-              border: '1px solid #102a52'
+              border: '1px solid #102a52',
+              transition: 'all 0.25s ease',
+              cursor: 'pointer',
+              boxShadow: '0 0 0 rgba(0,179,255,0)'
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.transform = 'translateY(-6px)'
+              e.currentTarget.style.boxShadow =
+                '0 0 20px rgba(0,179,255,0.35)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow =
+                '0 0 0 rgba(0,179,255,0)'
             }}
           >
-            <small style={{ color: '#00b3ff' }}>{app.category}</small>
+            <small
+              style={{
+                color: '#00b3ff',
+                textTransform: 'uppercase',
+                fontSize: '0.75rem'
+              }}
+            >
+              {app.category}
+            </small>
+
             <h3 style={{ margin: '10px 0' }}>{app.title}</h3>
-            <p style={{ color: '#bcdcff' }}>{app.description}</p>
+
+            <p style={{ color: '#bcdcff', fontSize: '0.95rem' }}>
+              {app.description}
+            </p>
           </div>
         ))}
       </div>
